@@ -1,0 +1,39 @@
+<!-- Add/Edit Author Form -->
+<div class="add-edit-author-form" *ngIf="showAddEditForm">
+  <h2>{{ author.authorName ? "Edit" : "Add" }} Author</h2>
+
+  <form (ngSubmit)="saveAuthor()">
+    <div>
+      <label for="authorName">Author Name</label>
+      <input
+        type="text"
+        id="authorName"
+        [(ngModel)]="author.authorName"
+        name="authorName"
+        required
+      />
+    </div>
+    <div>
+      <label for="authorGender">Author Gender</label>
+      <input
+        type="text"
+        id="authorGender"
+        [(ngModel)]="author.gender"
+        name="authorGender"
+        required
+      />
+    </div>
+    <div>
+      <label for="authorAge">Author Age</label>
+      <input
+        type="text"
+        id="authorAge"
+        [(ngModel)]="author.age"
+        name="authorAge"
+        required
+      />
+    </div>
+    <button type="submit">Save</button>
+    <button type="button" (click)="cancel()">Cancel</button>
+  </form>
+</div>

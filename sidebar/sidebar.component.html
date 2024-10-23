@@ -1,0 +1,68 @@
+<div class="sidebar" [ngClass]="{ 'sidebar-collapsed': isCollapsed }">
+  <div class="toggle-sidebar-btn" (click)="toggleSidebar()">
+    <i class="fa fa-bars"></i>
+    <!-- Thêm icon bars vào đây -->
+    <span *ngIf="isCollapsed"></span>
+    <span *ngIf="!isCollapsed"></span>
+  </div>
+  <div class="avatar" *ngIf="avatarUrl">
+    <img [src]="avatarUrl" alt="Avatar" />
+  </div>
+
+  <nav>
+    <ul>
+      <li>
+        <a routerLink="/home">
+          <i class="fa fa-home nav-icon"></i>
+          <span class="nav-text" *ngIf="!isCollapsed">Home</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="book-list">
+          <i class="fa fa-book nav-icon"></i>
+          <span class="nav-text" *ngIf="!isCollapsed">Book List</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="borrow-list">
+          <i class="fa fa-list-alt nav-icon"></i>
+          <span class="nav-text" *ngIf="!isCollapsed">Borrow List</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="author">
+          <i class="fa fa-users nav-icon"></i>
+          <span class="nav-text" *ngIf="!isCollapsed">Author List</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="publisher">
+          <i class="fa fa-building nav-icon"></i>
+          <span class="nav-text" *ngIf="!isCollapsed">Publisher List</span>
+        </a>
+      </li>
+      <li>
+        <a routerLink="upload-image">
+          <i class="fa fa-upload nav-icon"></i>
+          <span class="nav-text" *ngIf="!isCollapsed">Test image upload</span>
+        </a>
+      </li>
+      <!-- Add other navigation links here -->
+    </ul>
+  </nav>
+  <div class="logout">
+    <button (click)="logout()">
+      <i class="fa fa-sign-out nav-icon"></i>
+      <span class="nav-text" *ngIf="!isCollapsed">Logout</span>
+    </button>
+  </div>
+  <button class="toggle-btn" (click)="toggleSidebar()">
+    <i
+      class="fa"
+      [ngClass]="{
+        'fa-chevron-left': isCollapsed,
+        'fa-chevron-right': !isCollapsed
+      }"
+    ></i>
+  </button>
+</div>

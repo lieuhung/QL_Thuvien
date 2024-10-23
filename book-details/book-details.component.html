@@ -1,0 +1,54 @@
+<div class="container mt-5">
+  <div *ngIf="book" class="card p-4 book-details">
+    <h2>{{ book.bookName }}</h2>
+    <!-- <img
+      [src]="book.imagePath || 'assets/default-book-image.jpg'"
+      alt="{{ book.bookName }}"
+      width="200"
+    /> -->
+    <p>Status: {{ book.status }}</p>
+    <!-- <p>Borrowed Date: {{ phieuMuon.dateCreated | date }}</p>
+    <p>Due Date: {{ phieuMuon.expidate | date }}</p> -->
+
+    <button
+      *ngIf="book.status !== 'Considered'"
+      class="btn btn-primary"
+      (click)="borrowBook()"
+    >
+      Borrow
+    </button>
+    <button
+      *ngIf="canReadBook()"
+      class="btn btn-success"
+      (click)="navigateToReadBook()"
+    >
+      Read Book
+    </button>
+
+    <!-- Borrow Form -->
+    <div *ngIf="showBorrowForm" class="borrow-form">
+      <h3>Borrow Form</h3>
+      <form (ngSubmit)="borrowBook()">
+        <p><strong>Book Name:</strong> {{ book.bookName }}</p>
+        <p><strong>Borrow Date:</strong> {{ today | date }}</p>
+        <p><strong>Due Date:</strong> {{ dueDate | date }}</p>
+        <button type="submit" class="btn btn-primary">Confirm Borrow</button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="toggleBorrowForm()"
+        >
+          Cancel
+        </button>
+      </form>
+    </div>
+
+    <button class="btn btn-secondary" (click)="navigateBack()">
+      Back to List
+    </button>
+  </div>
+
+  <ng-template #loading>
+    <p>Loading book details...</p>
+  </ng-template>
+</div>

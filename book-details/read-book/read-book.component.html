@@ -1,0 +1,94 @@
+<div class="container mt-5" *ngIf="book">
+  <h1 class="mb-4">Bạn đang đọc quyển: {{ book.bookName }}</h1>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Mô tả sách</h5>
+      <p class="card-text">{{ book.description }}</p>
+    </div>
+  </div>
+  <!-- Book Content Section -->
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-title">Nội dung sách</h5>
+      <div class="book-content">
+        <p>
+          Trong một thế giới đang không ngừng biến đổi, con người luôn tìm kiếm
+          ý nghĩa và mục đích cho cuộc sống của mình. Cuốn sách này đưa bạn vào
+          một hành trình khám phá bản thân và thế giới xung quanh, mở ra những
+          cánh cửa mới về nhận thức và sự hiểu biết. Chương đầu tiên bắt đầu với
+          việc xem xét những thách thức mà chúng ta phải đối mặt trong cuộc sống
+          hàng ngày. Từ áp lực công việc đến mối quan hệ cá nhân, mỗi khía cạnh
+          đều được phân tích kỹ lưỡng để tìm ra nguồn gốc của stress và lo âu.
+          Tác giả đưa ra những phương pháp thực tế để đối phó với những tình
+          huống khó khăn, giúp độc giả xây dựng khả năng phục hồi tinh thần và
+          cảm xúc. Tiếp theo, cuốn sách đi sâu vào việc khám phá tiềm năng con
+          người. Bằng cách kết hợp các nghiên cứu khoa học mới nhất với những
+          triết lý cổ đại, tác giả chỉ ra rằng mỗi cá nhân đều có khả năng vượt
+          qua giới hạn của bản thân. Các bài tập thực hành và kỹ thuật thiền
+          định được giới thiệu như những công cụ để phát triển tâm trí và nâng
+          cao nhận thức. Chương ba tập trung vào việc xây dựng mối quan hệ có ý
+          nghĩa. Trong thời đại số hóa, nhiều người cảm thấy bị cô lập và thiếu
+          kết nối. Cuốn sách đưa ra những chiến lược để cải thiện kỹ năng giao
+          tiếp, xây dựng lòng tin, và nuôi dưỡng tình bạn sâu sắc. Nó cũng thảo
+          luận về tầm quan trọng của việc thiết lập ranh giới lành mạnh trong
+          các mối quan hệ. Phần tiếp theo đề cập đến vai trò của công nghệ trong
+          cuộc sống hiện đại. Mặc dù công nghệ mang lại nhiều tiện ích, nó cũng
+          tạo ra những thách thức mới. Tác giả đưa ra những hướng dẫn về cách sử
+          dụng công nghệ một cách có ý thức, tránh nghiện công nghệ, và tìm kiếm
+          sự cân bằng giữa thế giới số và thế giới thực. Chương cuối cùng tổng
+          hợp tất cả các yếu tố trên để tạo ra một kế hoạch toàn diện nhằm sống
+          một cuộc đời có ý nghĩa và mãn nguyện. Nó khuyến khích độc giả đặt ra
+          mục tiêu lớn, nhưng cũng nhấn mạnh tầm quan trọng của việc trân trọng
+          những niềm vui nhỏ nhặt trong cuộc sống hàng ngày. Cuốn sách kết thúc
+          với một thông điệp đầy hy vọng, nhắc nhở chúng ta rằng mỗi người đều
+          có khả năng tạo ra sự thay đổi tích cực trong cuộc sống của mình và
+          của những người xung quanh.
+        </p>
+      </div>
+    </div>
+  </div>
+  <!-- Comment Section -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="mb-0">Bình luận</h3>
+    </div>
+    <div class="card-body">
+      <!-- Display Comments -->
+      <div class="comment-list mb-4">
+        <div class="comment mb-3" *ngFor="let comment of comments">
+          <div class="d-flex justify-content-between align-items-center">
+            <strong>Người dùng: {{ comment.userId }}</strong>
+            <small class="text-muted">{{
+              comment.createdDate | date : "dd/MM/yyyy HH:mm"
+            }}</small>
+          </div>
+          <p class="mb-0 mt-2">{{ comment.text }}</p>
+          <hr />
+        </div>
+      </div>
+
+      <!-- Comment Form -->
+      <form (ngSubmit)="addComment()">
+        <div class="form-group">
+          <label for="commentText">Thêm bình luận</label>
+          <textarea
+            id="commentText"
+            [(ngModel)]="text"
+            name="text"
+            rows="4"
+            class="form-control"
+            placeholder="Nhập bình luận của bạn ở đây..."
+          ></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">
+          Gửi bình luận
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <button class="btn btn-secondary mt-4" (click)="navigateBack()">
+    Quay lại danh sách
+  </button>
+</div>

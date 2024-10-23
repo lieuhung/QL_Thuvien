@@ -1,0 +1,48 @@
+<div class="container mt-5">
+  <div class="card p-4">
+    <h3 class="card-title">Borrowed Books</h3>
+
+    <!-- Thông báo khi không có sách được mượn -->
+    <div *ngIf="borrowList.length === 0" class="alert alert-info">
+      No borrowed books to display.
+    </div>
+
+    <!-- Vòng lặp hiển thị từng cuốn sách đã mượn -->
+    <div *ngFor="let book of borrowList" class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">{{ book.bookName }}</h5>
+        <p><strong>Status:</strong> {{ book.status }}</p>
+
+        <!-- Nút Approve cho Librarian -->
+        <button
+          *ngIf="role === 'librarian' && book.status === 'Considered'"
+          class="btn btn-primary mr-2"
+          (click)="approveBook(book)"
+        >
+          Approve
+        </button>
+
+        <!-- Nút Return cho User -->
+        <button
+          *ngIf="role === 'user' && book.status === 'Approved'"
+          class="btn btn-danger mr-2"
+          (click)="returnBook(book)"
+        >
+          Return
+        </button>
+
+        <!-- Nút Read Book cho Librarian và User -->
+        <button
+          *ngIf="
+            role === 'librarian' ||
+            (role === 'user' && book.status === 'Approved')
+          "
+          class="btn btn-success"
+          (click)="readBook(book)"
+        >
+          Read Book
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

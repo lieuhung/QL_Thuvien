@@ -1,0 +1,52 @@
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.book-details {
+    text-align: center;
+}
+
+.book-details h2 {
+    color: #007bff;
+}
+
+.book-details img {
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.book-details p {
+    margin-bottom: 10px;
+}
+
+.book-details button {
+    margin-top: 10px;
+}
+
+.borrow-form {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f8f9fa;
+}
+
+.borrow-form h3 {
+    margin-bottom: 10px;
+}
+
+.borrow-form form {
+    margin-top: 10px;
+}
+
+.borrow-form p {
+    margin-bottom: 5px;
+}
+
+.borrow-form button {
+    margin-right: 10px;
+}

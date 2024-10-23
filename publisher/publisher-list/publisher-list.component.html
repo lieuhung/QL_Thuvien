@@ -1,0 +1,78 @@
+<!-- List of Publishers -->
+<div class="container mt-5">
+  <div *ngIf="!showAddEditForm" class="card p-4">
+    <h2>List of Publishers</h2>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Publisher Name</th>
+          <th>Address</th>
+          <th *ngIf="isLibrarian()">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let publisher of pubList">
+          <td>{{ publisher.publisherName }}</td>
+          <td>{{ publisher.address }}</td>
+          <td *ngIf="isLibrarian()">
+            <button
+              class="btn btn-sm btn-primary"
+              (click)="editPublisher(publisher)"
+            >
+              Edit
+            </button>
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="deletePublisher(publisher.publisherName)"
+            >
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <button
+      *ngIf="isLibrarian()"
+      class="btn btn-primary"
+      (click)="addPublisher()"
+    >
+      Add Publisher
+    </button>
+  </div>
+
+  <!-- Add/Edit Publisher Form -->
+  <div class="add-edit-publisher-form card p-4" *ngIf="showAddEditForm">
+    <h2>{{ isEditMode ? "Edit" : "Add" }} Publisher</h2>
+    <form (ngSubmit)="savePublisher()">
+      <div class="form-group">
+        <label for="publisherName">Publisher Name</label>
+        <input
+          type="text"
+          class="form-control"
+          id="publisherName"
+          [(ngModel)]="publisher.publisherName"
+          name="publisherName"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="publisherAddress">Publisher Address</label>
+        <input
+          type="text"
+          class="form-control"
+          id="publisherAddress"
+          [(ngModel)]="publisher.address"
+          name="publisherAddress"
+          required
+        />
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        {{ isEditMode ? "Update" : "Save" }}
+      </button>
+      <button type="button" class="btn btn-secondary" (click)="cancel()">
+        Cancel
+      </button>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+/* styles.css */
+.login-background {
+    background-image: url('/assets/login_backgroun.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.8);
+    /* Adjust transparency */
+    padding: 2rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+    /* Ensure positioning context for icons */
+}
+
+.position-relative {
+    position: relative;
+}
+
+.fas {
+    font-size: 1.2rem;
+    /* Adjust icon size if necessary */
+    color: #007bff;
+    /* Change icon color if needed */
+}
+
+input[type="password"] {
+    padding-right: 2.5rem;
+    /* Add padding for the eye icon */
+}
+
+.fas.fa-eye {
+    cursor: pointer;
+    position: absolute;
+    top: -50%;
+    right: 10px;
+    transform: translateY(-50%);
+    color: #007bff;
+    /* Icon color */
+}

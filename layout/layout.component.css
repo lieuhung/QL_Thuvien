@@ -1,0 +1,28 @@
+.layout {
+    display: flex;
+}
+
+.nav-pane {
+    width: 200px;
+    transition: width 0.3s;
+}
+
+.nav-pane.small {
+    width: 50px;
+}
+
+.main-content {
+    flex-grow: 1;
+}
+
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #f5f5f5;
+}
+
+.auth-buttons button,
+.greeting button {
+    margin-left: 10px;
+}

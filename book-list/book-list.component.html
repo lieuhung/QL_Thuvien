@@ -1,0 +1,224 @@
+<div class="container mt-5">
+  <div *ngIf="username && role" class="card p-4">
+    <h3 class="card-title">Welcome, {{ username }}!</h3>
+    <!-- Ô tìm kiếm -->
+    <div class="mb-3">
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search by Book Name"
+          [(ngModel)]="searchTerm"
+          (input)="searchBooks()"
+        />
+        <div class="input-group-append">
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            (click)="searchBooks()"
+          >
+            <i class="fa fa-search"></i> Search
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Danh sách sách -->
+    <div *ngIf="!showAddEditForm">
+      <h2>List of Books</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th (click)="sortBooks('bookId')">
+              Book Id <i class="fa fa-sort"></i>
+            </th>
+            <th (click)="sortBooks('bookName')">
+              Book Name <i class="fa fa-sort"></i>
+            </th>
+            <th (click)="sortBooks('category')">
+              Category <i class="fa fa-sort"></i>
+            </th>
+            <th (click)="sortBooks('amount')">
+              Amount <i class="fa fa-sort"></i>
+            </th>
+            <th (click)="sortBooks('status')">
+              Status <i class="fa fa-sort"></i>
+            </th>
+            <th *ngIf="isLibrarian()">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let book of filteredBooks">
+            <td>
+              <a [routerLink]="['/books', book.bookId]">{{ book.bookId }}</a>
+            </td>
+            <td>{{ book.bookName }}</td>
+            <td>{{ book.category }}</td>
+            <td>{{ book.amount }}</td>
+            <td>{{ book.status }}</td>
+            <td *ngIf="isLibrarian()">
+              <button class="btn btn-sm btn-primary" (click)="editBook(book)">
+                Edit
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                (click)="deleteBook(book.bookId)"
+              >
+                Delete
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <button *ngIf="isLibrarian()" class="btn btn-primary" (click)="addBook()">
+        Add Book
+      </button>
+    </div>
+
+    <!-- Form Thêm/Sửa Sách -->
+    <div class="add-edit-book-form card" *ngIf="showAddEditForm">
+      <h2 class="card-header">{{ isEditMode ? "Edit" : "Add" }} Book</h2>
+      <form class="card-body" (ngSubmit)="saveBook()">
+        <!-- Chỉ hiển thị trường bookId khi đang ở chế độ chỉnh sửa -->
+        <!-- <div *ngIf="isEditMode" class="form-group">
+          <label for="bookId">Book Id</label>
+          <input
+            type="text"
+            id="bookId"
+            [(ngModel)]="book.bookId"
+            name="bookId"
+            class="form-control"
+          />
+        </div> -->
+
+        <div class="form-group">
+          <label for="bookName">Book Name</label>
+          <input
+            type="text"
+            id="bookName"
+            [(ngModel)]="book.bookName"
+            name="bookName"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="category">Category</label>
+          <input
+            type="text"
+            id="category"
+            [(ngModel)]="book.category"
+            name="category"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input
+            type="text"
+            id="description"
+            [(ngModel)]="book.description"
+            name="description"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="amount">Amount</label>
+          <input
+            type="number"
+            id="amount"
+            [(ngModel)]="book.amount"
+            name="amount"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="status">Status</label>
+          <input
+            type="text"
+            id="status"
+            [(ngModel)]="book.status"
+            name="status"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="price">Price</label>
+          <input
+            type="number"
+            id="price"
+            [(ngModel)]="book.price"
+            name="price"
+            class="form-control"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="comment">Comment</label>
+          <input
+            type="text"
+            id="comment"
+            [(ngModel)]="book.comment"
+            name="comment"
+            class="form-control"
+          />
+        </div>
+        <div class="form-group">
+          <label for="publisherName">Publisher Name</label>
+          <select
+            id="publisherName"
+            [(ngModel)]="book.publisherName"
+            name="publisherName"
+            class="form-control"
+            required
+          >
+            <option
+              *ngFor="let publisher of publishers"
+              [value]="publisher.publisherName"
+            >
+              {{ publisher.publisherName }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="authorName">Author Name</label>
+          <select
+            id="authorName"
+            [(ngModel)]="book.authorName"
+            name="authorName"
+            class="form-control"
+            required
+          >
+            <option *ngFor="let author of authors" [value]="author.authorName">
+              {{ author.authorName }}
+            </option>
+          </select>
+        </div>
+        <!-- File upload -->
+        <label>
+          Upload Image:
+          <input type="file" (change)="onFileSelected($event)" />
+        </label>
+        <button type="button" (click)="uploadImage()">Upload</button>
+        <div *ngIf="uploadedFilePath">
+          <img [src]="uploadedFilePath" alt="Uploaded Image" />
+        </div>
+        <button type="submit" class="btn btn-primary">
+          {{ isEditMode ? "Update" : "Save" }}
+        </button>
+        <button type="button" class="btn btn-secondary" (click)="cancel()">
+          Cancel
+        </button>
+      </form>
+    </div>
+
+    <!-- Loading state -->
+    <ng-template #loading>
+      <p>Loading books...</p>
+    </ng-template>
+  </div>
+</div>

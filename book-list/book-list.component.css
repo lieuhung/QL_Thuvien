@@ -1,0 +1,96 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: center;
+}
+
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+button {
+    margin: 0 5px;
+    /* Space buttons a bit */
+}
+/* Example CSS for book grid layout */
+.card {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.card-img-top {
+    height: 200px;
+    /* Adjust image height as needed */
+    object-fit: cover;
+}
+
+.add-edit-book-form {
+    margin-top: 20px;
+}
+/* book-list.component.css */
+.sort-header {
+    cursor: pointer;
+}
+
+.sort-header.active {
+    background-color: #f0f0f0;
+}
+.card {
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    border-color: #6c757d;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    border-color: #545b62;
+}
+
+.btn-outline-secondary {
+    border-color: #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #6c757d;
+    border-color: #6c757d;
+    color: white;
+}
+
+.fa {
+    margin-right: 5px;
+}
